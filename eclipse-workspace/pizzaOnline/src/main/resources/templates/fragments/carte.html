@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+</head>
+<body>
+	<div th:fragment="carte" class="container text-center">
+		<h1 class="my-3">Bienvenue chez Pizza Online !</h1>
+
+		<div class="row">
+
+			<h2 class="mb-3">CARTE DE NOS PRODUITS</h2>
+
+			<div th:each="produit : ${produits}" class="card"
+				style="width: 18rem;">
+				<img src="..." class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 th:text="${produit.nom}" class="card-title"></h5>
+					<p th:text="${produit.id}" class="card-text"></p>
+					<p th:text="${produit.description}" class="card-text"></p>
+					<p th:text="${produit.prix}" class="card-text"></p>
+					<a class="btn btn-dark"
+						th:href="@{/carte/detail(id=${produit.id})}">Détail produit</a>
+				</div>
+			</div>
+
+		</div>
+</body>
+</html>

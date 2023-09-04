@@ -5,15 +5,25 @@ public class Produit {
 	private int id;
 	private String nom;
 	private String description;
+	private float prix;
 
 	public Produit() {
 	}
 
-	public Produit(int id, String nom, String description) {
+	public Produit(int id, String nom, String description, float prix) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.description = description;
+		this.prix = prix;
+	}
+
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
 	}
 
 	public String getDescription() {
@@ -42,7 +52,7 @@ public class Produit {
 
 	@Override
 	public String toString() {
-		return "Produit [id=" + id + ", nom=" + nom + ", description=" + description + "]";
+		return "Produit [id=" + id + ", nom=" + nom + ", description=" + description + ", prix=" + prix + "]";
 	}
 
 }
