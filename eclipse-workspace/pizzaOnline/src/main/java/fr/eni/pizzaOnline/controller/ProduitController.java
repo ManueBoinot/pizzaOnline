@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fr.eni.pizzaOnline.bll.ProduitService;
-import fr.eni.pizzaOnline.bo.Produit;
+import fr.eni.pizzaOnline.entity.Produit;
+import fr.eni.pizzaOnline.service.ProduitService;
 import jakarta.websocket.server.PathParam;
 
 @Controller
@@ -21,15 +21,11 @@ import jakarta.websocket.server.PathParam;
 public class ProduitController {
 
 	@Autowired
-	private ProduitService produitService;
+	ProduitService produitService;
 
 	@ModelAttribute
 	public List<Produit> initProduits() {
 		return produitService.consulterProduits();
-	}
-
-	public ProduitController(ProduitService produitService) {
-		this.produitService = produitService;
 	}
 
 	// **************************************************************
@@ -41,8 +37,8 @@ public class ProduitController {
 	}
 
 	@GetMapping("/carte/detail")
-	public String detail(@PathParam("id") int id, Model model) {
-		model.addAttribute("produit", produitService.getProduitById(id));
+	public String detail(@PathParam("id") Long id, Model model) {
+		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
 		return "detail";
 	}
 
@@ -63,28 +59,26 @@ public class ProduitController {
 	// **************************************************************
 	// Modifier un produit ******************************
 	@GetMapping("/modifierProduit/{id}")
-	public String modifierProduitAcces(@PathVariable("id") int id, Model model) {
-		Produit produit = produitService.getProduitById(id);
-		model.addAttribute("produit", produit);
+	public String modifierProduitAcces(@PathVariable("id") Long id, Model model) {
+		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
 		return "modifierProduit";
 	}
 
 	@PostMapping("/modifierProduit/{id}")
-	public String modifierProduit(@PathVariable("id") int id, Produit produit, BindingResult result, Model model) {
+	public String modifierProduit(@PathVariable("id") Long id, Produit produit, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			produit.setId(id);
 			return "modifierProduit";
 		}
-		produitService.modifierProduit(produit);
+		produitService.modifierProduit(produit, id);
 		return "redirect:/carte";
 	}
 
 	// **************************************************************
 	// Supprimer un produit ******************************
 	@GetMapping("/supprimerProduit/{id}")
-	public String supprimerProduit(@PathVariable("id") int id, Model model) {
-		Produit produit = produitService.getProduitById(id);
-		produitService.supprimerProduit(produit);
+	public String supprimerProduit(@PathVariable("id") Long id, Model model) {
+		produitService.supprimerProduit(id);
 		return "redirect:/carte";
 	}
 

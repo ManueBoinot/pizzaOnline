@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import fr.eni.pizzaOnline.bll.ProduitService;
+import fr.eni.pizzaOnline.service.ProduitService;
 
 @Controller
 public class MainController {

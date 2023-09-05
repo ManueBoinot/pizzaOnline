@@ -7,8 +7,7 @@
 		data-bs-theme="dark" th:fragment="header">
 		<div class="container-fluid">
 			<a class="navbar-brand d-flex align-items-center" th:href="@{/}">
-			<img
-				th:src="@{/img/pizza_logo.png}" alt="logo" style="height: 50px">
+				<img th:src="@{/img/pizza_logo.png}" alt="logo" style="height: 50px">
 				<p class="my-auto ms-2">PIZZA ONLINE</p>
 			</a>
 			<button class="navbar-toggler" type="button"
@@ -17,16 +16,12 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<div class="collapse navbar-collapse justify-content-center"
+				id="navbarNav">
 				<ul class="navbar-nav gap-5">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" th:href="@{/}">Accueil</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/carte}">Carte</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/panier}">Panier</a></li>
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/commandes}">Commandes</a></li>
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/livraisons}">Livraisons</a></li>
 				</ul>
 				<!-- 						<span class="navbar-text" -->
 				<!-- 							th:if="${membre != null && membre.id!=0}" -->

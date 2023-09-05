@@ -8,35 +8,37 @@
 	rel="stylesheet"
 	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Pizza Online</title>
 </head>
-<body>
-	<div th:replace="fragments/header :: header">...</div>
+<body class="bg-danger">
+	<div th:replace="~{fragments/header :: header}">...</div>
 
-	<main class="container text-center">
+	<main class="text-center bg-light container text-center vh-100">
 
-		<h1>Bienvenue chez Pizza Online !</h1>
+		<div class="row justify-content-center bg-light">
 
-		<div class="row">
+			<h1 class="py-5">DÉTAIL DU PRODUIT</h1>
 
-			<h2>DÉTAIL DU PRODUIT</h2>
-
-			<div class="card" style="width: 18rem;">
-				<img src="..." class="card-img-top" alt="...">
+			<div class="card" style="width: 500px;">
+				<img class="card-img-top mx-auto" th:src="@{${produit.image}}"
+					alt="illustration pizza" style="height: 300px; width: 300px">
 				<div class="card-body">
 					<h5 th:text="${produit.nom}" class="card-title"></h5>
 					<p th:text="${produit.description}" class="card-text"></p>
-					<p th:text="${produit.prix}" class="card-text"></p>
+					<p class="card-text"><span th:text="${produit.prix}"></span> €</p>
 					<a class="btn btn-dark"
 						th:href="@{/modifierProduit/{id}(id=${produit.id})}">Modifier
 						le produit</a> <a class="btn btn-danger"
 						th:href="@{/supprimerProduit/{id}(id=${produit.id})}">Supprimer
 						le produit</a>
+							<a class="btn btn-success"
+						href="#" title="Ajouter au panier"><i class="fa-solid fa-cart-plus"></i></a>
 				</div>
 			</div>
 	</main>
 
-	<div th:replace="fragments/footer :: footer">...</div>
+	<div th:replace="~{fragments/footer :: footer}">...</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
