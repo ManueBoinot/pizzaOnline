@@ -1,13 +1,14 @@
 package fr.eni.pizzaOnline.service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eni.pizzaOnline.entity.Role;
 import fr.eni.pizzaOnline.repository.RoleRepository;
-import jakarta.inject.Singleton;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -15,12 +16,11 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	RoleRepository roleRepository;
 
-	@Singleton
 	public RoleServiceImpl(RoleRepository roleRepository) {
 		this.roleRepository = roleRepository;
-		creerRole(new Role("Serveur"));
-		creerRole(new Role("Pizzaïolo"));
-		creerRole(new Role("Gérant"));
+//		creerRole(new Role("Livreur"));
+//		creerRole(new Role("Pizzaïolo"));
+//		creerRole(new Role("Gérant"));
 	}
 
 	@Override
@@ -35,8 +35,17 @@ public class RoleServiceImpl implements RoleService {
 		if (Objects.nonNull(role.getLibelle()) && !"".equalsIgnoreCase(role.getLibelle())) {
 			roleDB.setLibelle(role.getLibelle());
 		}
-
 		return roleRepository.save(roleDB);
+	}
+
+	@Override
+	public List<Role> consulterRoles() {
+		return roleRepository.findAll();
+	}
+
+	@Override
+	public Optional<Role> getRoleById(Long id) {
+		return roleRepository.findById(id);
 	}
 
 	@Override

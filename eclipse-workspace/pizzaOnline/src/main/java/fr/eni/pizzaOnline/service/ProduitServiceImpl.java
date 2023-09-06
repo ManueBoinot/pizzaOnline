@@ -18,28 +18,29 @@ public class ProduitServiceImpl implements ProduitService {
 
 	public ProduitServiceImpl(ProduitRepository produitRepository) {
 		this.produitRepository = produitRepository;
-		enregistrerProduit(
-				new Produit("Margherita", "Base tomate, emmental", 8f, "/img/pizza_margherita.jpg"));
-		enregistrerProduit(
-				new Produit("Regina", "Base tomate, jambon, champignon, emmental", 9f, "/img/pizza_regina.jpg"));
-		enregistrerProduit(new Produit("Pesto verde", "Base pesto vert, jambon cru, mozzarella, emmental", 10f,
-				"/img/pizza_pesto_verde.jpg"));
-		enregistrerProduit(new Produit("Pesto rosso", "Base pesto rouge, jambon cru, mozzarella, emmental", 10f,
-				"/img/pizza_pesto_rosso.jpg"));
-		enregistrerProduit(new Produit("3 Formaggi", "Base tomate, gorgonzola, mozzarella, emmental", 11f,
-				"/img/pizza_3_formaggi.jpg"));
+
+//		enregistrerProduit(new Produit("Margherita", "Base tomate, emmental", 8f, "/img/pizza_margherita.jpg", 1L));
+//		enregistrerProduit(
+//				new Produit("Regina", "Base tomate, jambon, champignon, emmental", 9f, "/img/pizza_regina.jpg", 1L));
+//		enregistrerProduit(new Produit("Pesto verde", "Base pesto vert, jambon cru, mozzarella, emmental", 10f,
+//				"/img/pizza_pesto_verde.jpg", 1L));
+//		enregistrerProduit(new Produit("Pesto rosso", "Base pesto rouge, jambon cru, mozzarella, emmental", 10f,
+//				"/img/pizza_pesto_rosso.jpg", 1L));
+//		enregistrerProduit(new Produit("3 Formaggi", "Base tomate, gorgonzola, mozzarella, emmental", 11f,
+//				"/img/pizza_3_formaggi.jpg", 1L));
 	}
 
 	@Override
 	public List<Produit> consulterProduits() {
-		return (List<Produit>) produitRepository.findAll();
+		return produitRepository.findAll();
 	}
 
 	@Override
 	public Produit enregistrerProduit(Produit produit) {
-		produit.setImage("/img/pizza_logo.png");
+		if (produit.getImage().isBlank() || produit.getImage().isEmpty()) {
+			produit.setImage("/img/pizza_logo.png");
+		}
 		return produitRepository.save(produit);
-
 	}
 
 	@Override

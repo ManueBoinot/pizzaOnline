@@ -23,9 +23,11 @@ public class Produit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String nom;
+	@Column(nullable = false)
 	private String description;
+	@Column(nullable = false)
 	private float prix;
 
 	@Column(columnDefinition = "varchar(255) default '/img/pizza_logo.png'")
@@ -33,7 +35,16 @@ public class Produit {
 
 	@ManyToOne
 	@JoinColumn(name = "idType", nullable = false)
-	private TypeProduit typeProduit;
+	private TypeProduit typeProduit = new TypeProduit();
+
+	public Produit(String nom, String description, float prix, String image, Long typeProduitId) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.prix = prix;
+		this.image = image;
+		this.typeProduit.setId(typeProduitId);
+	}
 
 	public Produit(String nom, String description, float prix, String image, TypeProduit typeProduit) {
 		super();
@@ -42,14 +53,5 @@ public class Produit {
 		this.prix = prix;
 		this.image = image;
 		this.typeProduit = typeProduit;
-	};
-	
-	public Produit(String nom, String description, float prix, String image) {
-		super();
-		this.nom = nom;
-		this.description = description;
-		this.prix = prix;
-		this.image = image;
-	};
-
+	}
 }

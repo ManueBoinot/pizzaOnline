@@ -21,7 +21,11 @@ public class TypeProduit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable=false)
 	private String libelle;
+	
+	public TypeProduit(String libelle) {
+		this.libelle = libelle;
+	}
 
 }
