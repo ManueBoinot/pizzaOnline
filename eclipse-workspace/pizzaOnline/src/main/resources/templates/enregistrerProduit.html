@@ -25,6 +25,12 @@
 					<div class="col-8 offset-2">
 
 						<div class="mb-3">
+                            <label for="typesProduit" class="form-label">Type de produit</label>
+                            <select class="form-select" id="typesProduit" rows="4" th:field="*{typeProduit}">
+                                <option th:each="typeProduit : ${typesProduit}" th:text="${typeProduit.libelle}" th:value="${typeProduit.id}"></option>
+                            </select>
+                        </div>
+						<div class="mb-3">
 							<label for="nom" class="form-label">Nom</label> <input
 								type="text" class="form-control" id="nom" th:field="*{nom}">
 						</div>
