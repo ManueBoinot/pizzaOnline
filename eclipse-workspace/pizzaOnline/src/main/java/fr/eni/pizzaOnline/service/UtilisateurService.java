@@ -12,6 +12,8 @@ public interface UtilisateurService {
 	List<Utilisateur> consulterUtilisateurs();
 
 	Optional<Utilisateur> getUtilisateurById(Long id);
+	
+	Utilisateur findByEmail(String email);
 
 	Utilisateur modifierUtilisateur(Utilisateur utilisateur, Long id);
 

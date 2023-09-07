@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.eni.pizzaOnline.entity.Utilisateur;
@@ -16,8 +15,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Autowired
 	UtilisateurRepository utilisateurRepository;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+
 
 	public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
 		this.utilisateurRepository = utilisateurRepository;
@@ -28,7 +26,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur creerUtilisateur(Utilisateur utilisateur) {
-		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
+		utilisateur.setMotDePasse(utilisateur.getMotDePasse());
 		return utilisateurRepository.save(utilisateur);
 	}
 
@@ -65,5 +63,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public void supprimerUtilisateur(Long id) {
 		utilisateurRepository.deleteById(id);
+	}
+
+	@Override
+	public Utilisateur findByEmail(String email) {
+		return utilisateurRepository.findByEmail(email);
 	}
 }

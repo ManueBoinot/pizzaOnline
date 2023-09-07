@@ -43,6 +43,7 @@ public class ProduitController {
 	// Afficher un produit ******************************
 	@GetMapping("/carte/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
+		System.err.println("début");
 		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
 		return "detail";
 	}

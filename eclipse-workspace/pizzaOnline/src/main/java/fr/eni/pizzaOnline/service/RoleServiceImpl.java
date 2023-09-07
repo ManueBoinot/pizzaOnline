@@ -18,9 +18,9 @@ public class RoleServiceImpl implements RoleService {
 
 	public RoleServiceImpl(RoleRepository roleRepository) {
 		this.roleRepository = roleRepository;
-//		creerRole(new Role("Livreur"));
-//		creerRole(new Role("Pizzaïolo"));
-//		creerRole(new Role("Gérant"));
+//		creerRole(new Role("LIVREUR"));
+//		creerRole(new Role("PIZZAIOLO"));
+//		creerRole(new Role("GERANT"));
 	}
 
 	@Override
