@@ -29,9 +29,9 @@
 					<p th:text="${produit.description}" class="card-text"></p>
 					<p class="card-text"><span th:text="${produit.prix}"></span> €</p>
 					<a class="btn btn-dark"
-						th:href="@{/private/modifierProduit/{id}(id=${produit.id})}">Modifier
+						th:href="@{'/private/modifierProduit/' + ${produit.id}}">Modifier
 						le produit</a> <a class="btn btn-danger"
-						th:href="@{/private/supprimerProduit/{id}(id=${produit.id})}">Supprimer
+						th:href="@{'/private/supprimerProduit/' + ${produit.id}}">Supprimer
 						le produit</a>
 							<a class="btn btn-success"
 						href="#" title="Ajouter au panier"><i class="fa-solid fa-cart-plus"></i></a>

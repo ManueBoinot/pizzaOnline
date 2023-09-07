@@ -22,10 +22,10 @@ import fr.eni.pizzaOnline.service.UtilisateurServiceImpl;
 public class SecurityConfig {
 
 	@Autowired
-	private UtilisateurServiceImpl utilisateurServiceImpl;
+	UtilisateurServiceImpl utilisateurServiceImpl;
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public PasswordEncoder encoder() {
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return encoder;
 	}
@@ -48,8 +48,7 @@ public class SecurityConfig {
 
 		for (Utilisateur user : utilisateurs) {
 			UserDetails userDetails = User.withUsername(user.getEmail())
-					.password(passwordEncoder().encode(user.getMotDePasse())).roles(user.getRole().getLibelle())
-					.build();
+					.password(encoder().encode(user.getMotDePasse())).roles(user.getRole().getLibelle()).build();
 			mem.createUser(userDetails);
 		}
 		return mem;

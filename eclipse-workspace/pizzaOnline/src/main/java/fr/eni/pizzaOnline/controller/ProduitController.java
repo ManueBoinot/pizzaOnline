@@ -43,7 +43,6 @@ public class ProduitController {
 	// Afficher un produit ******************************
 	@GetMapping("/carte/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
-		System.err.println("début");
 		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
 		return "detail";
 	}
@@ -72,11 +71,14 @@ public class ProduitController {
 
 	@PostMapping("/private/modifierProduit/{id}")
 	public String modifierProduit(@PathVariable("id") Long id, Produit produit, BindingResult result, Model model) {
+		System.err.println("début");
 		if (result.hasErrors()) {
 			produit.setId(id);
+			System.err.println("erreur");
 			return "modifierProduit";
 		}
 		produitService.modifierProduit(produit, id);
+		System.err.println("fin");
 		return "redirect:/home";
 	}
 
