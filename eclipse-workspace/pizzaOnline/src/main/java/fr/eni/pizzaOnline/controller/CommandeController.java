@@ -21,9 +21,9 @@ import fr.eni.pizzaOnline.service.ProduitService;
 
 @Controller
 @RequestMapping("/commander")
-@SessionAttributes({"produits","commande"})
+@SessionAttributes({ "produits", "commande" })
 public class CommandeController {
-	
+
 	@Autowired
 	ProduitService produitService;
 	@Autowired
@@ -40,16 +40,16 @@ public class CommandeController {
 	public List<Produit> initProduits() {
 		return produitService.consulterProduits();
 	}
-	
+
 	@GetMapping
 	public String commander(Model model) {
 		model.addAttribute("produits", produitService.consulterProduits());
 		return "commander";
 	}
-	
+
 	@PostMapping("/ajouter/{id:[0-9]+}")
 	public String ajouterAuPanier(@PathVariable long id, @ModelAttribute("commande") Commande commande,
-									@RequestParam int quantite) {
+			@RequestParam int quantite) {
 		commande = cs.ajouterProduitAuPanier(commande, quantite, produitService.getProduitById(id));
 		return "redirect:/commander";
 	}

@@ -14,10 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 public class DetailCommandeKey implements Serializable {
-	
+
 	private Long commandeId;
 	private Long produitId;
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(commandeId, produitId);

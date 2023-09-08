@@ -17,27 +17,27 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DetailCommande {
-	
+
 	@EmbeddedId
 	private DetailCommandeKey id = new DetailCommandeKey();
 
 	@ManyToOne
 	@MapsId("commandeId")
 	private Commande commande;
-	
+
 	@ManyToOne
 	@MapsId("produitId")
 	private Produit produit;
 
 	private int quantite;
-	
+
 	public DetailCommande(int quantite, Commande commande, Produit produit) {
 		super();
 		this.quantite = quantite;
 		this.commande = commande;
 		this.produit = produit;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,5 +57,4 @@ public class DetailCommande {
 				+ "]";
 	}
 
-	
 }
