@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Pizza Online</title>
 </head>
+
 <body class="bg-danger">
 	<div th:replace="~{fragments/header :: header}">...</div>
 
@@ -28,9 +29,9 @@
 					<p th:text="${produit.description}" class="card-text"></p>
 					<p class="card-text"><span th:text="${produit.prix}"></span> €</p>
 					<a class="btn btn-dark"
-						th:href="@{/private/modifierProduit/{id}(id=${produit.id})}">Modifier
+						th:href="@{'/private/modifierProduit/' + ${produit.id}}">Modifier
 						le produit</a> <a class="btn btn-danger"
-						th:href="@{/private/supprimerProduit/{id}(id=${produit.id})}">Supprimer
+						th:href="@{'/private/supprimerProduit/' + ${produit.id}}">Supprimer
 						le produit</a>
 							<a class="btn btn-success"
 						href="#" title="Ajouter au panier"><i class="fa-solid fa-cart-plus"></i></a>

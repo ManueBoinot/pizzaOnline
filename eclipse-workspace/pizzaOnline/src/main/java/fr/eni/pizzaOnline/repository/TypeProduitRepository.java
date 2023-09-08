@@ -7,5 +7,5 @@ import fr.eni.pizzaOnline.entity.TypeProduit;
 
 @Repository
 public interface TypeProduitRepository extends JpaRepository<TypeProduit, Long> {
-	
+
 }
