@@ -28,5 +28,4 @@ public class PreparationController {
 		cs.passerCommandeEnPreparerParID(id);
 		return "redirect:/preparation";
 	}
-	
 }

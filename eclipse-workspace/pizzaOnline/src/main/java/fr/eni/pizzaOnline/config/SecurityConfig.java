@@ -33,7 +33,10 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(
-				(requests) -> requests.requestMatchers("/private/**").authenticated().anyRequest().permitAll()
+				(requests) -> requests
+				.requestMatchers("/private/**").hasAnyAuthority( "GERANT")
+				.requestMatchers("/preparation/**", "/livraison/**").hasAnyAuthority("LIVREUR", "PIZZAIOLO", "GERANT")
+				.anyRequest().permitAll()
 
 		).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
 
@@ -47,8 +50,11 @@ public class SecurityConfig {
 		InMemoryUserDetailsManager mem = new InMemoryUserDetailsManager();
 
 		for (Utilisateur user : utilisateurs) {
-			UserDetails userDetails = User.withUsername(user.getEmail())
-					.password(encoder().encode(user.getMotDePasse())).build();
+			UserDetails userDetails = User
+					.withUsername(user.getEmail())
+					.password(encoder().encode(user.getMotDePasse()))
+					.roles(user.getRole().getLibelle())
+					.build();
 			mem.createUser(userDetails);
 		}
 		return mem;
