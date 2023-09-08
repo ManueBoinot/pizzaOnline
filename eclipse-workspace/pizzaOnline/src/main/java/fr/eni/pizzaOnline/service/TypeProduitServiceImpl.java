@@ -16,6 +16,12 @@ public class TypeProduitServiceImpl implements TypeProduitService {
 	@Autowired
 	TypeProduitRepository typeProduitRepository;
 
+	public TypeProduitServiceImpl(TypeProduitRepository typeProduitRepository) {
+		this.typeProduitRepository = typeProduitRepository;
+//		creerTypeProduit(new TypeProduit("Pizza"));
+//		creerTypeProduit(new TypeProduit("Boisson"));
+	}
+
 	@Override
 	public TypeProduit creerTypeProduit(TypeProduit typeProduit) {
 		return typeProduitRepository.save(typeProduit);
