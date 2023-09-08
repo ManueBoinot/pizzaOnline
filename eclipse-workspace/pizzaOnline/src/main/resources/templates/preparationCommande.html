@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>Pizza Online</title>
+</head>
+
+<body class="bg-danger">
+	<header>
+		<div th:replace="~{fragments/header :: header}">...</div>
+	</header>
+
+	<main class="text-center bg-light container text-center pb-5">
+		<h1 class="py-5">Préparation commandes</h1>
+
+
+		<div class="row col-8 offset-2 justify-content-center">
+
+			<div th:each="commande : ${commandes}" class="card m-1">
+				<div class="card-body">
+					<h5 th:text="'Commande n°'+${commande.id}+' - à préparer pour '+${commande.dateHeurePreparation}" class="card-title"></h5>
+					<th:block th:each="detailCommande : ${commande.detailsCommande}">
+						<p th:text="${detailCommande.produit.nom}+'  x'+${detailCommande.quantite}"></p>
+					</th:block>
+					<form th:action="@{'/preparation/preparer/'+${commande.id}}" method="post">
+						<button type="submit" class="btn btn-info">Préparée</button>
+					</form>
+				</div>
+			</div>
+	</main>
+
+	<footer>
+		<div th:replace="~{fragments/footer :: footer}">...</div>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+	<script src="js/script.js"></script>  
+</body>
+</html>

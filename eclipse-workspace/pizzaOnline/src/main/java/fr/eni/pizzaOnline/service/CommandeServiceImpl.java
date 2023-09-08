@@ -11,12 +11,15 @@ import fr.eni.pizzaOnline.entity.Commande;
 import fr.eni.pizzaOnline.entity.DetailCommande;
 import fr.eni.pizzaOnline.entity.Produit;
 import fr.eni.pizzaOnline.repository.CommandeRepository;
+import fr.eni.pizzaOnline.repository.EtatRepository;
 
 @Service
 public class CommandeServiceImpl implements CommandeService {
 
 	@Autowired
 	CommandeRepository commandeRepository;
+	@Autowired
+	EtatRepository etatRepository;
 
 	@Override
 	public Commande ajouterProduitAuPanier(Commande commande, int quantite, Produit produit) {
@@ -75,6 +78,16 @@ public class CommandeServiceImpl implements CommandeService {
 		commandeRepository.save(commande);
 	}	
 	
+	@Override
+	public List<Commande> consulterCommandesAPreparer() {
+		//return null;
+		System.out.println(commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get());
+		List<Commande> test1 = commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get();
+		Commande test2 = test1.get(0);
+		String test3 = test2.getDetailsCommande().get(0).getProduit().getNom();
+		System.out.println(test3);
+		return commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get(); 
+	}
 	
 	
 	
@@ -96,5 +109,7 @@ public class CommandeServiceImpl implements CommandeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

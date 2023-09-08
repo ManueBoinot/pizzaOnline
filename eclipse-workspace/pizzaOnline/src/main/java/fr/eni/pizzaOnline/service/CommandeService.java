@@ -19,9 +19,13 @@ public interface CommandeService {
 	void ajouterUneCommande(Commande commande);
 
 	List<Commande> consulterCommandes();
+	
+	List<Commande> consulterCommandesAPreparer();
 
 	Optional<Commande> getCommandeById(Long id);
 
 	Commande modifierCommande(Commande commande, Long id);
+	
+	
 
 }
