@@ -70,9 +70,13 @@ public class CommandeServiceImpl implements CommandeService {
 
 	@Override
 	public void ajouterUneCommande(Commande commande) {
+		System.err.println("début ajout commande");
 		commande.setDateHeureLivraison(LocalDateTime.now().plusHours(2));
 		commande.setDateHeurePreparation(LocalDateTime.now().plusHours(1));
+		System.err.println("milieu ajout commande");
+		System.err.println(commande.getId());
 		commandeRepository.save(commande);
+		System.err.println(commande);
 	}	
 	
 	

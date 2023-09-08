@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.pizzaOnline.entity.Produit;
 import fr.eni.pizzaOnline.repository.TypeProduitRepository;
+import fr.eni.pizzaOnline.service.DataMockBDD;
 import fr.eni.pizzaOnline.service.ProduitService;
 
 @Controller
@@ -30,9 +31,12 @@ public class ProduitController {
 	ProduitService produitService;
 	@Autowired
 	TypeProduitRepository tpr;
+	@Autowired
+	DataMockBDD dataMockBDD;
 
 	@ModelAttribute
 	public List<Produit> initProduits() {
+//		dataMockBDD.initBDDData();
 		return produitService.consulterProduits();
 	}
 

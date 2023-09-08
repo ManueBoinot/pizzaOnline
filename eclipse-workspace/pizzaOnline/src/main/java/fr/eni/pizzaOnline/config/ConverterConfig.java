@@ -7,17 +7,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import fr.eni.pizzaOnline.converter.StringToTypeProduit;
 
-	@Configuration
-	public class ConverterConfig implements WebMvcConfigurer {
+@Configuration
+public class ConverterConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private StringToTypeProduit stringToTypeProduit;
-	
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(stringToTypeProduit);
 	}
-		
+
 }
-
-

@@ -1,9 +1,5 @@
 package fr.eni.pizzaOnline.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +18,7 @@ import lombok.Setter;
 public class Utilisateur {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false)
@@ -42,20 +38,18 @@ public class Utilisateur {
 	private Role role = new Role();
 
 	public Utilisateur(String nom, String prenom, String email, String motDePasse, Long idRole) {
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
-		this.motDePasse = encoder.encode(motDePasse);
+		this.motDePasse = motDePasse;
 		this.role.setId(idRole);
 	}
 
 	public Utilisateur(String nom, String prenom, String email, String motDePasse, Role role) {
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
-		this.motDePasse = encoder.encode(motDePasse);
+		this.motDePasse = motDePasse;
 		this.role = role;
 	}
 

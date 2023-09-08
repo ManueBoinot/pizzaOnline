@@ -48,7 +48,7 @@ public class SecurityConfig {
 
 		for (Utilisateur user : utilisateurs) {
 			UserDetails userDetails = User.withUsername(user.getEmail())
-					.password(encoder().encode(user.getMotDePasse())).roles(user.getRole().getLibelle()).build();
+					.password(encoder().encode(user.getMotDePasse())).build();
 			mem.createUser(userDetails);
 		}
 		return mem;

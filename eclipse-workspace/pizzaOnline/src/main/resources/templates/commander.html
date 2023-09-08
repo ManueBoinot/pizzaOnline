@@ -39,11 +39,15 @@
 					<p class="card-text">
 						<span th:text="${produit.prix}"></span> €
 					</p>
-					<form th:action="@{'/commander/ajouter/'+${produit.id}}" method="post">
-						<button type="submit" class="btn btn-info">Ajouter au panier</button>
-						<button type="button" class="btn btn-outline-dark"  id="moins" onclick="minus(this)">-</button>
-						<input class="form-control" type="text" value="1" name="quantite" readonly>
-						<button type="button" class="btn btn-outline-dark" id="plusquantite" onclick="plus(this)">+</button>
+					<form th:action="@{'/commander/ajouter/'+${produit.id}}" method="post" class="row justify-content-center">
+					<div class="col-7 d-flex"><button type="button" class="btn btn-outline-dark"  id="moins" onclick="minus(this)">-</button>
+						<input class="form-control text-end" type="text" value="0" name="quantite" readonly>
+						<button type="button" class="btn btn-outline-dark" id="plusquantite" onclick="plus(this)">+</button></div>
+					<div class="col-auto">
+							<button type="submit" class="btn btn-success">
+								<i class="fa-solid fa-cart-plus"></i>
+							</button>
+						</div>		
 					</form>
 				</div>
 			</div>

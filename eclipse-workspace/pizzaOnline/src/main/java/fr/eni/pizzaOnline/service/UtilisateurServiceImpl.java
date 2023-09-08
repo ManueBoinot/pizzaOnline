@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.eni.pizzaOnline.entity.Utilisateur;
@@ -19,14 +21,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
 		this.utilisateurRepository = utilisateurRepository;
-//		creerUtilisateur(new Utilisateur("Dupont", "Marie", "marie.dupont@email.com", "mdp", 1L));
-//		creerUtilisateur(new Utilisateur("Bodin", "Bernadette", "bernadette.bodin@email.com", "mdp", 2L));
-//		creerUtilisateur(new Utilisateur("Loiseau", "Julien", "julien.loiseau@email.com", "mdp", 3L));
 	}
 
 	@Override
 	public Utilisateur creerUtilisateur(Utilisateur utilisateur) {
-		utilisateur.setMotDePasse(utilisateur.getMotDePasse());
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		utilisateur.setMotDePasse(encoder.encode(utilisateur.getMotDePasse()));
 		return utilisateurRepository.save(utilisateur);
 	}
 
@@ -56,7 +56,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		if (Objects.nonNull(utilisateur.getEmail()) && !"".equalsIgnoreCase(utilisateur.getEmail())) {
 			utilisateurDB.setEmail(utilisateur.getEmail());
 		}
-
 		return utilisateurRepository.save(utilisateurDB);
 	}
 
