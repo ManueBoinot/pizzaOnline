@@ -11,12 +11,15 @@ import fr.eni.pizzaOnline.entity.Commande;
 import fr.eni.pizzaOnline.entity.DetailCommande;
 import fr.eni.pizzaOnline.entity.Produit;
 import fr.eni.pizzaOnline.repository.CommandeRepository;
+import fr.eni.pizzaOnline.repository.EtatRepository;
 
 @Service
 public class CommandeServiceImpl implements CommandeService {
 
 	@Autowired
 	CommandeRepository commandeRepository;
+	@Autowired
+	EtatRepository etatRepository;
 
 	@Override
 	public Commande ajouterProduitAuPanier(Commande commande, int quantite, Produit produit) {
@@ -70,14 +73,23 @@ public class CommandeServiceImpl implements CommandeService {
 
 	@Override
 	public void ajouterUneCommande(Commande commande) {
-		System.err.println("début ajout commande");
 		commande.setDateHeureLivraison(LocalDateTime.now().plusHours(2));
 		commande.setDateHeurePreparation(LocalDateTime.now().plusHours(1));
-		System.err.println("milieu ajout commande");
-		System.err.println(commande.getId());
 		commandeRepository.save(commande);
-		System.err.println(commande);
-	}	
+	}
+	
+	@Override
+	public List<Commande> consulterCommandesAPreparer() {
+		return commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get(); 
+	}
+	
+	@Override
+	public void passerCommandeEnPreparerParID(long id) {
+		Commande commandePreparer = commandeRepository.findById(id).get();
+		commandePreparer.setEtat(etatRepository.findById(3l).get());
+		commandeRepository.save(commandePreparer);
+	}
+	
 	
 	
 	
@@ -100,5 +112,9 @@ public class CommandeServiceImpl implements CommandeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	
 
 }
