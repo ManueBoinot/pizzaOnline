@@ -14,10 +14,6 @@ public class DetailCommandeServiceImpl implements DetailCommandeService {
 	
 	@Autowired
 	DetailCommandeRepository detailCommandeRepository;
-	
-	public DetailCommandeServiceImpl(DetailCommandeRepository detailCommandeRepository) {
-		this.detailCommandeRepository = detailCommandeRepository;
-	}
 
 	@Override
 	public Commande creerDetailCommande(Commande commande) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.pizzaOnline.entity.Produit;
+import fr.eni.pizzaOnline.repository.TypeProduitRepository;
 import fr.eni.pizzaOnline.service.ProduitService;
 
 @Controller
@@ -27,6 +28,8 @@ public class ProduitController {
 
 	@Autowired
 	ProduitService produitService;
+	@Autowired
+	TypeProduitRepository tpr;
 
 	@ModelAttribute
 	public List<Produit> initProduits() {
@@ -43,7 +46,7 @@ public class ProduitController {
 	// Afficher un produit ******************************
 	@GetMapping("/carte/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
-		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
+		model.addAttribute("produit", produitService.getProduitById(id));
 		return "detail";
 	}
 
@@ -51,6 +54,7 @@ public class ProduitController {
 	// Créer un nouveau produit ******************************
 	@GetMapping("/private/enregistrerProduit")
 	public String enregistrerProduitAcces(Model model) {
+		model.addAttribute("typesProduit",tpr.findAll());
 		model.addAttribute("produit", new Produit());
 		return "enregistrerProduit";
 	}
@@ -65,7 +69,7 @@ public class ProduitController {
 	// Modifier un produit ******************************
 	@GetMapping("/private/modifierProduit/{id}")
 	public String modifierProduitAcces(@PathVariable("id") Long id, Model model) {
-		produitService.getProduitById(id).ifPresent(o -> model.addAttribute("produit", o));
+		model.addAttribute("produit", produitService.getProduitById(id));
 		return "modifierProduit";
 	}
 
