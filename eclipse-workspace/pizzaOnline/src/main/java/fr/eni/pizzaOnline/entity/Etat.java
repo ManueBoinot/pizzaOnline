@@ -18,9 +18,14 @@ import lombok.Setter;
 public class Etat {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(unique = true, nullable=false)
 	private String libelle;
+	
+	public Etat(String libelle) {
+		this.libelle = libelle;
+	}
 
 }

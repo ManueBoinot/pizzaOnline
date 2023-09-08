@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TypeProduit {
+public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +23,8 @@ public class TypeProduit {
 
 	@Column(unique = true, nullable=false)
 	private String libelle;
-	
-	public TypeProduit(String libelle) {
+
+	public Role(String libelle) {
 		this.libelle = libelle;
 	}
 

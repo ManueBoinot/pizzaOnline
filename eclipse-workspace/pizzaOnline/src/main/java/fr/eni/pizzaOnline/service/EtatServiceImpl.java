@@ -14,6 +14,15 @@ public class EtatServiceImpl implements EtatService {
 	@Autowired
 	EtatRepository etatRepository;
 
+	public EtatServiceImpl(EtatRepository etatRepository) {
+		this.etatRepository = etatRepository;
+//		creerEtat(new Etat("Créée"));
+//		creerEtat(new Etat("Payée"));
+//		creerEtat(new Etat("Préparée"));
+//		creerEtat(new Etat("En livraison"));
+//		creerEtat(new Etat("Livrée"));
+	}
+
 	@Override
 	public Etat creerEtat(Etat etat) {
 		return etatRepository.save(etat);
