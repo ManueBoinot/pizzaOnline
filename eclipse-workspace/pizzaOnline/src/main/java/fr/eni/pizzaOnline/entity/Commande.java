@@ -1,14 +1,14 @@
 package fr.eni.pizzaOnline.entity;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -24,27 +24,16 @@ import lombok.Setter;
 public class Commande {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private LocalDateTime dateHeureLivraison;
-	private LocalDateTime dateHeurePreparation;
+	private LocalDate dateHeureLivraison;
+	private LocalDate dateHeurePreparation;
 
 	@ManyToOne
+	@JoinColumn(name = "idEtat", nullable = false)
 	private Etat etat;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<DetailCommande> detailsCommande = new ArrayList<>();
-	
-	public Commande(Etat etat) {
-		this.etat = etat;
-	}
-	
-	public void resetCommande() {
-		this.id = null;
-		this.detailsCommande = new ArrayList<>();
-		this.etat = null;
-		this.dateHeureLivraison = null;
-		this.dateHeurePreparation = null;
-	}
+	@OneToMany
+	private Set<DetailCommande> detailCommande = new HashSet<>();
 
 }

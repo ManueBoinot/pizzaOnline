@@ -1,6 +1,7 @@
 package fr.eni.pizzaOnline.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import fr.eni.pizzaOnline.entity.Produit;
 
@@ -10,7 +11,7 @@ public interface ProduitService {
 
 	List<Produit> consulterProduits();
 
-	Produit getProduitById(Long id);
+	Optional<Produit> getProduitById(Long id);
 
 	Produit modifierProduit(Produit produit, Long id);
 
