@@ -26,6 +26,8 @@ public interface CommandeService {
 
 	Commande modifierCommande(Commande commande, Long id);
 	
+	void passerCommandeEnPreparerParID(long id);
+	
 	
 
 }

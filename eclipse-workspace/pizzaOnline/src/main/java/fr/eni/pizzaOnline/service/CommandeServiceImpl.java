@@ -76,18 +76,21 @@ public class CommandeServiceImpl implements CommandeService {
 		commande.setDateHeureLivraison(LocalDateTime.now().plusHours(2));
 		commande.setDateHeurePreparation(LocalDateTime.now().plusHours(1));
 		commandeRepository.save(commande);
-	}	
+	}
 	
 	@Override
 	public List<Commande> consulterCommandesAPreparer() {
-		//return null;
-		System.out.println(commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get());
-		List<Commande> test1 = commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get();
-		Commande test2 = test1.get(0);
-		String test3 = test2.getDetailsCommande().get(0).getProduit().getNom();
-		System.out.println(test3);
 		return commandeRepository.findByEtatIs(etatRepository.findById(2l).get()).get(); 
 	}
+	
+	@Override
+	public void passerCommandeEnPreparerParID(long id) {
+		Commande commandePreparer = commandeRepository.findById(id).get();
+		commandePreparer.setEtat(etatRepository.findById(3l).get());
+		commandeRepository.save(commandePreparer);
+	}
+	
+	
 	
 	
 	
@@ -109,6 +112,8 @@ public class CommandeServiceImpl implements CommandeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	
 
